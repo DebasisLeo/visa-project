@@ -19,7 +19,7 @@ const MyAddedVisas = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:4000/visa?user=${user?.email}`);
+        const response = await fetch(`https://sunflower-server.vercel.app/visa?user=${user?.email}`);
         const data = await response.json();
         setLoadedData(data);
       } catch (error) {
@@ -47,7 +47,7 @@ const MyAddedVisas = () => {
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:4000/visa/${id}`, { method: "DELETE" })
+        fetch(`https://sunflower-server.vercel.app/visa/${id}`, { method: "DELETE" })
           .then(res => res.json())
           .then(() => {
             setLoadedData(prevData => prevData.filter(visa => visa._id !== id));
@@ -67,7 +67,7 @@ const MyAddedVisas = () => {
     updatedVisa.fee = Number(updatedVisa.fee);
 
     try {
-      const response = await fetch(`http://localhost:4000/visa/${selectedVisa._id}`, {
+      const response = await fetch(`https://sunflower-server.vercel.app/visa/${selectedVisa._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedVisa),

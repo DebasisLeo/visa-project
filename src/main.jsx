@@ -27,17 +27,17 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
-        loader: () => fetch('http://localhost:4000/visa').then((res) => res.json()),
+        loader: () => fetch('https://sunflower-server.vercel.app/visa').then((res) => res.json()),
       },
       {
         path: '/all-visa',
         element: <AllVisas />,
-        loader: () => fetch('http://localhost:4000/visa').then((res) => res.json()),
+        loader: () => fetch('https://sunflower-server.vercel.app/visa').then((res) => res.json()),
       },
       {
         path: '/visa/:id',
         element: <PrivateRoutes><VisaDetails /></PrivateRoutes>,
-        loader: ({ params }) => fetch(`http://localhost:4000/visa/${params.id}`).then((res) => res.json()),
+        loader: ({ params }) => fetch(`https://sunflower-server.vercel.app/visa/${params.id}`).then((res) => res.json()),
       },
       {
         path: '/add-visa',
@@ -54,12 +54,12 @@ const router = createBrowserRouter([
       {
         path: '/my-visas',
         element: <PrivateRoutes><MyAddedVisas /></PrivateRoutes>,
-        loader:()=>fetch('http://localhost:4000/visa')
+        loader:()=>fetch('https://sunflower-server.vercel.app/visa')
       },
       {
         path: '/my-applications',
         element: <PrivateRoutes><MyVisaApplication /></PrivateRoutes>,
-        loader:()=>fetch('http://localhost:4000/visa')
+        loader:()=>fetch('https://sunflower-server.vercel.app/visa')
         
       },
     ],

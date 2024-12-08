@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { AuthContext } from './Providers/Authprovider';
+import Swal from 'sweetalert2'; // Import SweetAlert2
 
 const VisaDetails = () => {
   const visa = useLoaderData(); // Fetch visa data passed via loader
@@ -8,16 +9,13 @@ const VisaDetails = () => {
   const navigate = useNavigate(); // For navigation
   const [showModal, setShowModal] = useState(false);
 
-
-
-  // console.log(visa)
   const handleApply = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const applicationData = Object.fromEntries(formData.entries());
 
     try {
-      const response = await fetch('http://localhost:4000/applications', {
+      const response = await fetch('https://sunflower-server.vercel.app/applications', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -27,14 +25,32 @@ const VisaDetails = () => {
       });
 
       if (response.ok) {
-        alert('Application submitted successfully!');
+        // Show success message with SweetAlert2
+        Swal.fire({
+          title: 'Application Submitted!',
+          text: 'Your application has been successfully submitted.',
+          icon: 'success',
+          confirmButtonText: 'OK',
+        });
         navigate('/my-applications');
       } else {
-        alert('Failed to submit application. Please try again.');
+        // Show error message with SweetAlert2
+        Swal.fire({
+          title: 'Submission Failed!',
+          text: 'Failed to submit your application. Please try again later.',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
       }
     } catch (error) {
       console.error('Error submitting application:', error);
-      alert('Error submitting application. Please try again.');
+      // Show error message with SweetAlert2
+      Swal.fire({
+        title: 'Error!',
+        text: 'Error submitting your application. Please try again.',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
     }
 
     setShowModal(false);

@@ -46,7 +46,7 @@ const AddVisa = () => {
   
     console.log('Form Submitted:', formValues);
   
-    fetch('http://localhost:4000/visa', {
+    fetch('https://sunflower-server.vercel.app/visa', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

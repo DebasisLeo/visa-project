@@ -6,12 +6,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBigHL9uzq4jI8LEpPa3jnUunsU_fwHtI4",
-  authDomain: "sunflower-project-416c5.firebaseapp.com",
-  projectId: "sunflower-project-416c5",
-  storageBucket: "sunflower-project-416c5.firebasestorage.app",
-  messagingSenderId: "696741045500",
-  appId: "1:696741045500:web:c6c9f815c1349f1ce52379"
+  apiKey:import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId
 };
 
 // Initialize Firebase

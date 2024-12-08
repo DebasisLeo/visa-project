@@ -3,6 +3,7 @@ import { AuthContext } from './Providers/Authprovider';
 import { FaTimesCircle } from 'react-icons/fa';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Swal from 'sweetalert2'; // Import SweetAlert2
 
 const MyVisaApplications = () => {
   const { user } = useContext(AuthContext);
@@ -14,7 +15,7 @@ const MyVisaApplications = () => {
 
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:4000/applications?email=${user.email}`)
+      fetch(`https://sunflower-server.vercel.app/applications?email=${user.email}`)
         .then((res) => {
           if (!res.ok) throw new Error('Failed to fetch applications.');
           return res.json();
@@ -45,19 +46,28 @@ const MyVisaApplications = () => {
   };
 
   const handleCancel = async (id) => {
-    if (window.confirm('Are you sure you want to cancel this application?')) {
+    const result = await Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to cancel this application?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Cancel it!',
+      cancelButtonText: 'No, keep it',
+    });
+
+    if (result.isConfirmed) {
       try {
-        const res = await fetch(`http://localhost:4000/applications/${id}`, { method: 'DELETE' });
+        const res = await fetch(`https://sunflower-server.vercel.app/applications/${id}`, { method: 'DELETE' });
         if (res.ok) {
           setApplications((prev) => prev.filter((app) => app._id !== id));
           setFilteredApplications((prev) => prev.filter((app) => app._id !== id));
-          alert('Application canceled successfully.');
+          Swal.fire('Canceled!', 'Your application has been canceled.', 'success');
         } else {
-          alert('Failed to cancel application.');
+          Swal.fire('Error!', 'Failed to cancel application. Please try again.', 'error');
         }
       } catch (err) {
         console.error(err);
-        alert('Error canceling application.');
+        Swal.fire('Error!', 'Error canceling your application. Please try again.', 'error');
       }
     }
   };
