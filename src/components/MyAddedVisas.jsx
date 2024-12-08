@@ -73,10 +73,10 @@ const MyAddedVisas = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const updatedVisa = Object.fromEntries(formData.entries());
-    
+  
     // Convert fee to a number before sending the update request
     updatedVisa.fee = Number(updatedVisa.fee);
-
+  
     try {
       const response = await fetch(`http://localhost:4000/visa/${selectedVisa._id}`, {
         method: 'PUT',
@@ -85,19 +85,23 @@ const MyAddedVisas = () => {
         },
         body: JSON.stringify(updatedVisa),
       });
-
+  
       const data = await response.json();
-
+  
       if (response.ok) {
         Swal.fire({
           title: "Updated!",
           text: "Visa has been updated successfully.",
           icon: "success"
         });
-
-        // Update the state with the updated visa
-        setLoadedData(loadedData.map(visa => visa._id === selectedVisa._id ? data : visa));
-
+  
+        // Update the state with the returned updated visa data
+        setLoadedData(prevData => 
+          prevData.map(visa => 
+            visa._id === selectedVisa._id ? data : visa // Replace the old visa with the updated one
+          )
+        );
+  
         // Close the modal
         setShowModal(false);
       } else {
@@ -116,6 +120,9 @@ const MyAddedVisas = () => {
       });
     }
   };
+  
+  
+  
 
   return (
     <div className="container mx-auto p-6">
