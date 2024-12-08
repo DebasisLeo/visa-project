@@ -7,8 +7,10 @@ import 'aos/dist/aos.css'; // AOS styles
 const MyVisaApplications = () => {
   const { user } = useContext(AuthContext);
   const [applications, setApplications] = useState([]);
+  const [filteredApplications, setFilteredApplications] = useState([]); // Filtered applications state
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); // Error state
+  const [searchTerm, setSearchTerm] = useState(''); // State for search term
 
   useEffect(() => {
     if (user) {
@@ -21,6 +23,7 @@ const MyVisaApplications = () => {
         })
         .then((data) => {
           setApplications(data);
+          setFilteredApplications(data); // Initially, no filter
           setLoading(false);
         })
         .catch((err) => {
@@ -33,18 +36,36 @@ const MyVisaApplications = () => {
     AOS.init();
   }, [user]);
 
+  // Search handler
+  const handleSearch = () => {
+    if (!searchTerm) {
+      setFilteredApplications(applications); // If no search term, show all
+    } else {
+      const filtered = applications.filter((app) =>
+        app.visaDetails?.countryName.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredApplications(filtered);
+    }
+  };
+
   const handleCancel = async (id) => {
     const confirmCancel = window.confirm('Are you sure you want to cancel this application?');
     if (!confirmCancel) return;
-
+  
     try {
       const response = await fetch(`http://localhost:4000/applications/${id}`, {
         method: 'DELETE',
       });
-
+  
       if (response.ok) {
-        // Remove the application from the state
-        setApplications((prev) => prev.filter((app) => app._id !== id));
+        // Update the front-end state to reflect the deletion
+        setApplications((prevApplications) =>
+          prevApplications.filter((app) => app._id !== id)
+        );
+        // If you are showing filtered applications
+        setFilteredApplications((prevFilteredApplications) =>
+          prevFilteredApplications.filter((app) => app._id !== id)
+        );
         alert('Application canceled successfully.');
       } else {
         alert('Failed to cancel application. Please try again.');
@@ -54,6 +75,7 @@ const MyVisaApplications = () => {
       alert('Error canceling application. Please try again.');
     }
   };
+  
 
   // Show loading or error messages
   if (loading) {
@@ -67,11 +89,29 @@ const MyVisaApplications = () => {
   return (
     <div className="container mx-auto p-6">
       <h2 className="text-3xl font-semibold mb-8 text-center">My Visa Applications</h2>
+      
+      {/* Search bar */}
+      <div className="mb-6 flex justify-center">
+        <input
+          type="text"
+          placeholder="Search by country name"
+          className="border border-gray-300 p-2 rounded-l-md"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button
+          onClick={handleSearch}
+          className="bg-blue-500 text-white px-4 py-2 rounded-r-md hover:bg-blue-600"
+        >
+          Search
+        </button>
+      </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {applications.length === 0 ? (
+        {filteredApplications.length === 0 ? (
           <div className="col-span-full text-center text-xl text-gray-600">No applications found.</div>
         ) : (
-          applications.map((app) => (
+          filteredApplications.map((app) => (
             <div
               key={app._id}
               className="visa-card bg-white shadow-lg rounded-lg p-6"
