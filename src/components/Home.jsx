@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
-import { Typewriter } from 'react-simple-typewriter'; // Import Typewriter
-import { FaSun, FaMoon } from 'react-icons/fa'; // Import React Icons for theme toggle
-import AOS from 'aos'; // Import AOS
-import 'aos/dist/aos.css'; // AOS styles
+import { Typewriter } from 'react-simple-typewriter';
+import { FaSun, FaMoon } from 'react-icons/fa';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import bg from '../assets/bg.png';
+import bg1 from '../assets/bg1.png';
+import bg2 from '../assets/bg2.png';
 
 AOS.init();
 
@@ -11,18 +14,15 @@ const Home = () => {
   const visas = useLoaderData();
   const navigate = useNavigate();
 
-  // Get the stored theme from localStorage or default to light
   const storedTheme = localStorage.getItem('theme') || 'light';
   const [theme, setTheme] = useState(storedTheme);
 
-  // Toggle the theme between light and dark
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
-    localStorage.setItem('theme', newTheme); // Save to localStorage for persistence
+    localStorage.setItem('theme', newTheme);
   };
 
-  // Apply the theme to the body element when the theme state changes
   useEffect(() => {
     document.body.classList.remove('light', 'dark');
     document.body.classList.add(theme);
@@ -67,9 +67,55 @@ const Home = () => {
         </button>
       </div>
 
-      <h2 className="text-2xl font-bold mb-6 text-center">Latest Visas</h2>
+      {/* "Why Choose Us?" Section */}
+      <div className="my-12">
+        <h2 className="text-2xl font-bold text-center mb-6" data-aos="fade-up">
+          Why Choose Us?
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="p-6 bg-white border rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="100">
+            <h3 className="text-lg font-bold mb-4">Expert Guidance</h3>
+            <p>Our team of visa experts ensures a smooth and hassle-free process tailored to your needs.</p>
+          </div>
+          <div className="p-6 bg-white border rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="200">
+            <h3 className="text-lg font-bold mb-4">Affordable Pricing</h3>
+            <p>Get the best visa deals at competitive prices with no hidden charges.</p>
+          </div>
+          <div className="p-6 bg-white border rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="300">
+            <h3 className="text-lg font-bold mb-4">24/7 Support</h3>
+            <p>We are available round the clock to assist you with all your queries and concerns.</p>
+          </div>
+        </div>
+      </div>
 
-      {/* Visa Grid */}
+      {/* Carousel */}
+      <h2 className="text-2xl font-bold mb-6 text-center">Latest Visas</h2>
+      <div className="carousel w-full h-64 sm:h-80 md:h-96 lg:h-[500px]">
+        <div id="slide1" className="carousel-item relative w-full">
+          <img src={bg2} className="w-full h-full object-cover" alt="Background Image 1" />
+          <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+            <a href="#slide3" className="btn btn-circle">❮</a>
+            <a href="#slide2" className="btn btn-circle">❯</a>
+          </div>
+        </div>
+        <div id="slide2" className="carousel-item relative w-full">
+          <img src={bg1} className="w-full h-full object-cover" alt="Background Image 2" />
+          <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+            <a href="#slide1" className="btn btn-circle">❮</a>
+            <a href="#slide3" className="btn btn-circle">❯</a>
+          </div>
+        </div>
+        <div id="slide3" className="carousel-item relative w-full">
+          <img src={bg} className="w-full h-full object-cover" alt="Background Image 3" />
+          <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
+            <a href="#slide2" className="btn btn-circle">❮</a>
+            <a href="#slide1" className="btn btn-circle">❯</a>
+          </div>
+        </div>
+      </div>
+
+      {/* Visa Grid Section */}
+      <h2 className="text-2xl font-bold mt-12 mb-6 text-center">Explore Visa Options</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {visas.slice(0, 6).map((visa) => (
           <div
@@ -100,6 +146,27 @@ const Home = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Testimonials Section */}
+      <div className="my-12">
+        <h2 className="text-2xl font-bold text-center mb-6" data-aos="fade-up">
+          What Our Customers Say
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="p-6 bg-white border rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="100">
+            <p>"The best visa service I've ever used! Highly recommend to everyone."</p>
+            <h4 className="mt-4 font-bold">- John Doe</h4>
+          </div>
+          <div className="p-6 bg-white border rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="200">
+            <p>"Excellent customer support and very affordable pricing."</p>
+            <h4 className="mt-4 font-bold">- Jane Smith</h4>
+          </div>
+          <div className="p-6 bg-white border rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="300">
+            <p>"Got my visa in no time. A hassle-free and smooth process."</p>
+            <h4 className="mt-4 font-bold">- Alex Wilson</h4>
+          </div>
+        </div>
       </div>
 
       {/* See All Visas Button */}
