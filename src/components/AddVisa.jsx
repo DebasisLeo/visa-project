@@ -4,7 +4,7 @@ import AOS from 'aos';
 import { FaPaperPlane } from 'react-icons/fa'; // Import an icon from react-icons
 import { FaRegFileAlt, FaRegClock, FaRegEdit, FaRegListAlt } from 'react-icons/fa';
 import { Slide } from 'react-awesome-reveal'; // Import Slide effect from React Awesome Reveal
-
+import Swal from 'sweetalert2';
 AOS.init();
 
 const AddVisa = () => {
@@ -43,18 +43,62 @@ const AddVisa = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+  
     console.log('Form Submitted:', formValues);
-
+  
     fetch('http://localhost:4000/visa', {
       method: 'POST',
       headers: {
-        'content-type': 'application/json',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(formValues),
     })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw new Error('Failed to submit visa details');
+        }
+      })
+      .then((data) => {
+        console.log(data);
+  
+        // Show SweetAlert2 success message
+        Swal.fire({
+          title: 'Success!',
+          text: 'Visa added successfully!',
+          icon: 'success',
+          confirmButtonText: 'OK',
+          timer: 3000, // Auto-close after 3 seconds
+        });
+  
+        // Reset form values
+        setFormValues({
+          countryImage: '',
+          countryName: '',
+          visaType: '',
+          processingTime: '',
+          requiredDocuments: [],
+          description: '',
+          ageRestriction: '',
+          fee: '',
+          validity: '',
+          applicationMethod: '',
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+  
+        // Show SweetAlert2 error message
+        Swal.fire({
+          title: 'Error!',
+          text: 'Failed to add visa. Please try again.',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
+      });
   };
+  
 
   return (
     <div className="container mx-auto p-6 bg-gray-50 rounded-lg shadow-xl" data-aos="fade-up" data-aos-duration="1000">
