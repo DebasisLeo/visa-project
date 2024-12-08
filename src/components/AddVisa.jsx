@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import 'aos/dist/aos.css'; // Import AOS styles
 import AOS from 'aos';
-
+import { Fade } from 'react-awesome-reveal'; // Import the Fade animation from React Awesome Reveal
 
 AOS.init();
 
@@ -43,15 +43,15 @@ const AddVisa = () => {
     e.preventDefault();
     console.log('Form Submitted:', formValues);
 
-    fetch('http://localhost:4000/visa',{
-        method:'POST',
-        headers:{
-            'content-type':'application/json'
-        },
-        body:JSON.stringify(formValues)
+    fetch('http://localhost:4000/visa', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(formValues),
     })
-    .then(res=>res.json())
-    .then(data=>console.log(data))
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   };
 
   return (
@@ -65,185 +65,207 @@ const AddVisa = () => {
       </h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Country Image */}
-        <div>
-          <label htmlFor="countryImage" className="block font-semibold">
-            Country Image URL
-          </label>
-          <input
-            type="url"
-            id="countryImage"
-            name="countryImage"
-            value={formValues.countryImage}
-            onChange={handleInputChange}
-            placeholder="https://example.com/image.jpg"
-            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-        </div>
+        <Fade delay={100} triggerOnce>
+          <div>
+            <label htmlFor="countryImage" className="block font-semibold">
+              Country Image URL
+            </label>
+            <input
+              type="url"
+              id="countryImage"
+              name="countryImage"
+              value={formValues.countryImage}
+              onChange={handleInputChange}
+              placeholder="https://example.com/image.jpg"
+              className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+        </Fade>
 
         {/* Country Name */}
-        <div>
-          <label htmlFor="countryName" className="block font-semibold">
-            Country Name
-          </label>
-          <input
-            type="text"
-            id="countryName"
-            name="countryName"
-            value={formValues.countryName}
-            onChange={handleInputChange}
-            placeholder="Enter country name"
-            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-        </div>
+        <Fade delay={200} triggerOnce>
+          <div>
+            <label htmlFor="countryName" className="block font-semibold">
+              Country Name
+            </label>
+            <input
+              type="text"
+              id="countryName"
+              name="countryName"
+              value={formValues.countryName}
+              onChange={handleInputChange}
+              placeholder="Enter country name"
+              className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+        </Fade>
 
         {/* Visa Type */}
-        <div>
-          <label htmlFor="visaType" className="block font-semibold">
-            Visa Type
-          </label>
-          <select
-            id="visaType"
-            name="visaType"
-            value={formValues.visaType}
-            onChange={handleInputChange}
-            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          >
-            <option value="" disabled>
-              Select Visa Type
-            </option>
-            <option value="Tourist visa">Tourist Visa</option>
-            <option value="Student visa">Student Visa</option>
-            <option value="Official visa">Official Visa</option>
-          </select>
-        </div>
+        <Fade delay={300} triggerOnce>
+          <div>
+            <label htmlFor="visaType" className="block font-semibold">
+              Visa Type
+            </label>
+            <select
+              id="visaType"
+              name="visaType"
+              value={formValues.visaType}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            >
+              <option value="" disabled>
+                Select Visa Type
+              </option>
+              <option value="Tourist visa">Tourist Visa</option>
+              <option value="Student visa">Student Visa</option>
+              <option value="Official visa">Official Visa</option>
+            </select>
+          </div>
+        </Fade>
 
         {/* Processing Time */}
-        <div>
-          <label htmlFor="processingTime" className="block font-semibold">
-            Processing Time
-          </label>
-          <input
-            type="text"
-            id="processingTime"
-            name="processingTime"
-            value={formValues.processingTime}
-            onChange={handleInputChange}
-            placeholder="e.g., 7-14 days"
-            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-        </div>
+        <Fade delay={400} triggerOnce>
+          <div>
+            <label htmlFor="processingTime" className="block font-semibold">
+              Processing Time
+            </label>
+            <input
+              type="text"
+              id="processingTime"
+              name="processingTime"
+              value={formValues.processingTime}
+              onChange={handleInputChange}
+              placeholder="e.g., 7-14 days"
+              className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+        </Fade>
 
         {/* Required Documents */}
-        <div>
-          <label className="block font-semibold mb-2">Required Documents</label>
-          {documentOptions.map((doc) => (
-            <div key={doc} className="flex items-center mb-2">
-              <input
-                type="checkbox"
-                id={doc}
-                name="requiredDocuments"
-                value={doc}
-                onChange={handleInputChange}
-                className="mr-2"
-              />
-              <label htmlFor={doc} className="text-gray-700">
-                {doc}
-              </label>
-            </div>
-          ))}
-        </div>
+        <Fade delay={500} triggerOnce>
+          <div>
+            <label className="block font-semibold mb-2">Required Documents</label>
+            {documentOptions.map((doc) => (
+              <div key={doc} className="flex items-center mb-2">
+                <input
+                  type="checkbox"
+                  id={doc}
+                  name="requiredDocuments"
+                  value={doc}
+                  onChange={handleInputChange}
+                  className="mr-2"
+                />
+                <label htmlFor={doc} className="text-gray-700">
+                  {doc}
+                </label>
+              </div>
+            ))}
+          </div>
+        </Fade>
 
         {/* Description */}
-        <div>
-          <label htmlFor="description" className="block font-semibold">
-            Description
-          </label>
-          <textarea
-            id="description"
-            name="description"
-            value={formValues.description}
-            onChange={handleInputChange}
-            placeholder="Add a brief description..."
-            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            rows="4"
-            required
-          ></textarea>
-        </div>
+        <Fade delay={600} triggerOnce>
+          <div>
+            <label htmlFor="description" className="block font-semibold">
+              Description
+            </label>
+            <textarea
+              id="description"
+              name="description"
+              value={formValues.description}
+              onChange={handleInputChange}
+              placeholder="Add a brief description..."
+              className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              rows="4"
+              required
+            ></textarea>
+          </div>
+        </Fade>
 
         {/* Age Restriction */}
-        <div>
-          <label htmlFor="ageRestriction" className="block font-semibold">
-            Age Restriction
-          </label>
-          <input
-            type="number"
-            id="ageRestriction"
-            name="ageRestriction"
-            value={formValues.ageRestriction}
-            onChange={handleInputChange}
-            placeholder="Enter age restriction"
-            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-        </div>
+        <Fade delay={700} triggerOnce>
+          <div>
+            <label htmlFor="ageRestriction" className="block font-semibold">
+              Age Restriction
+            </label>
+            <input
+              type="number"
+              id="ageRestriction"
+              name="ageRestriction"
+              value={formValues.ageRestriction}
+              onChange={handleInputChange}
+              placeholder="Enter age restriction"
+              className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+        </Fade>
 
         {/* Fee */}
-        <div>
-          <label htmlFor="fee" className="block font-semibold">
-            Fee (in USD)
-          </label>
-          <input
-            type="number"
-            id="fee"
-            name="fee"
-            value={formValues.fee}
-            onChange={handleInputChange}
-            placeholder="Enter visa fee"
-            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-        </div>
+        <Fade delay={800} triggerOnce>
+          <div>
+            <label htmlFor="fee" className="block font-semibold">
+              Fee (in USD)
+            </label>
+            <input
+              type="number"
+              id="fee"
+              name="fee"
+              value={formValues.fee}
+              onChange={handleInputChange}
+              placeholder="Enter visa fee"
+              className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+        </Fade>
 
         {/* Validity */}
-        <div>
-          <label htmlFor="validity" className="block font-semibold">
-            Validity
-          </label>
-          <input
-            type="text"
-            id="validity"
-            name="validity"
-            value={formValues.validity}
-            onChange={handleInputChange}
-            placeholder="e.g., 6 months"
-            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-        </div>
+        <Fade delay={900} triggerOnce>
+          <div>
+            <label htmlFor="validity" className="block font-semibold">
+              Validity
+            </label>
+            <input
+              type="text"
+              id="validity"
+              name="validity"
+              value={formValues.validity}
+              onChange={handleInputChange}
+              placeholder="e.g., 6 months"
+              className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+        </Fade>
 
         {/* Application Method */}
-        <div>
-          <label htmlFor="applicationMethod" className="block font-semibold">
-            Application Method
-          </label>
-          <input
-            type="text"
-            id="applicationMethod"
-            name="applicationMethod"
-            value={formValues.applicationMethod}
-            onChange={handleInputChange}
-            placeholder="e.g., Online/Offline"
-            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-        </div>
+        <Fade delay={1000} triggerOnce>
+          <div>
+            <label htmlFor="applicationMethod" className="block font-semibold">
+              Application Method
+            </label>
+            <input
+              type="text"
+              id="applicationMethod"
+              name="applicationMethod"
+              value={formValues.applicationMethod}
+              onChange={handleInputChange}
+              placeholder="e.g., Online/Offline"
+              className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+        </Fade>
 
         {/* Submit Button */}
-      <div className='flex justify-center'> <button className='btn'>Add Visa</button></div>
+        <div className="flex justify-center">
+          <button className="btn">Add Visa</button>
+        </div>
       </form>
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
+import { Typewriter } from 'react-simple-typewriter'; // Import Typewriter
 
 const Home = () => {
   const visas = useLoaderData();
@@ -30,6 +31,19 @@ const Home = () => {
 
   return (
     <div className="container mx-auto p-6">
+      {/* Typewriter Text */}
+      <div className="mb-6 text-2xl font-bold">
+        <Typewriter
+          words={['Welcome to Visa Services', 'Find the Best Visa Deals', 'Explore Our Visa Options']}
+          loop={true}
+          cursor
+          cursorStyle="|"
+          typeSpeed={100}
+          deleteSpeed={50}
+          delaySpeed={2000}
+        />
+      </div>
+
       <button
         onClick={toggleTheme}
         className="mb-6 px-4 py-2 bg-gray-500 text-white rounded"

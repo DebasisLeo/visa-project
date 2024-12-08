@@ -44,6 +44,14 @@ const router = createBrowserRouter([
         element: <PrivateRoutes><AddVisa /></PrivateRoutes>,
       },
       {
+        path: '/login',
+        element: <Login />,
+      },
+      {
+        path: '/register',
+        element: <Register />,
+      },
+      {
         path: '/my-visas',
         element: <PrivateRoutes><MyAddedVisas /></PrivateRoutes>,
         loader:()=>fetch('http://localhost:4000/visa')
@@ -56,14 +64,7 @@ const router = createBrowserRouter([
       },
     ],
   },
-  {
-    path: '/login',
-    element: <Login />,
-  },
-  {
-    path: '/register',
-    element: <Register />,
-  },
+  
 ]);
 
 createRoot(document.getElementById('root')).render(
