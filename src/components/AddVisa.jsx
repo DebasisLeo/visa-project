@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import 'aos/dist/aos.css'; // Import AOS styles
 import AOS from 'aos';
-import { Fade } from 'react-awesome-reveal'; // Import the Fade animation from React Awesome Reveal
+import { FaPaperPlane } from 'react-icons/fa'; // Import an icon from react-icons
+import { FaRegFileAlt, FaRegClock, FaRegEdit, FaRegListAlt } from 'react-icons/fa';
+import { Slide } from 'react-awesome-reveal'; // Import Slide effect from React Awesome Reveal
 
 AOS.init();
 
@@ -55,21 +57,15 @@ const AddVisa = () => {
   };
 
   return (
-    <div
-      className="container mx-auto p-6 bg-gray-100 rounded-lg shadow-lg"
-      data-aos="fade-up"
-      data-aos-duration="1000"
-    >
-      <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
-        Add Visa Details
-      </h2>
-      <form onSubmit={handleSubmit} className="space-y-6">
+    <div className="container mx-auto p-6 bg-gray-50 rounded-lg shadow-xl" data-aos="fade-up" data-aos-duration="1000">
+      <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">Add Visa Details</h2>
+      <form onSubmit={handleSubmit} className="space-y-8">
         {/* Country Image */}
-        <Fade delay={100} triggerOnce>
-          <div>
-            <label htmlFor="countryImage" className="block font-semibold">
-              Country Image URL
-            </label>
+        <div data-aos="fade-right" data-aos-delay="100" data-aos-duration="1000">
+          <label htmlFor="countryImage" className="block font-semibold text-gray-700 mb-2">
+            Country Image URL
+          </label>
+          <div className="relative">
             <input
               type="url"
               id="countryImage"
@@ -77,78 +73,88 @@ const AddVisa = () => {
               value={formValues.countryImage}
               onChange={handleInputChange}
               placeholder="https://example.com/image.jpg"
-              className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
+            <FaRegFileAlt className="absolute top-3 right-3 text-gray-500" />
           </div>
-        </Fade>
+        </div>
 
         {/* Country Name */}
-        <Fade delay={200} triggerOnce>
+        <Slide left delay={200}>
           <div>
-            <label htmlFor="countryName" className="block font-semibold">
+            <label htmlFor="countryName" className="block font-semibold text-gray-700 mb-2">
               Country Name
             </label>
-            <input
-              type="text"
-              id="countryName"
-              name="countryName"
-              value={formValues.countryName}
-              onChange={handleInputChange}
-              placeholder="Enter country name"
-              className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
+            <div className="relative">
+              <input
+                type="text"
+                id="countryName"
+                name="countryName"
+                value={formValues.countryName}
+                onChange={handleInputChange}
+                placeholder="Enter country name"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+              <FaRegEdit className="absolute top-3 right-3 text-gray-500" />
+            </div>
           </div>
-        </Fade>
+        </Slide>
 
         {/* Visa Type */}
-        <Fade delay={300} triggerOnce>
+        <Slide left delay={300}>
           <div>
-            <label htmlFor="visaType" className="block font-semibold">
+            <label htmlFor="visaType" className="block font-semibold text-gray-700 mb-2">
               Visa Type
             </label>
-            <select
-              id="visaType"
-              name="visaType"
-              value={formValues.visaType}
-              onChange={handleInputChange}
-              className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            >
-              <option value="" disabled>
-                Select Visa Type
-              </option>
-              <option value="Tourist visa">Tourist Visa</option>
-              <option value="Student visa">Student Visa</option>
-              <option value="Official visa">Official Visa</option>
-            </select>
+            <div className="relative">
+              <select
+                id="visaType"
+                name="visaType"
+                value={formValues.visaType}
+                onChange={handleInputChange}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              >
+                <option value="" disabled>
+                  Select Visa Type
+                </option>
+                <option value="Tourist visa">Tourist Visa</option>
+                <option value="Student visa">Student Visa</option>
+                <option value="Official visa">Official Visa</option>
+              </select>
+              <FaRegListAlt className="absolute top-3 right-3 text-gray-500" />
+            </div>
           </div>
-        </Fade>
+        </Slide>
 
         {/* Processing Time */}
-        <Fade delay={400} triggerOnce>
+        <Slide left delay={400}>
           <div>
-            <label htmlFor="processingTime" className="block font-semibold">
+            <label htmlFor="processingTime" className="block font-semibold text-gray-700 mb-2">
               Processing Time
             </label>
-            <input
-              type="text"
-              id="processingTime"
-              name="processingTime"
-              value={formValues.processingTime}
-              onChange={handleInputChange}
-              placeholder="e.g., 7-14 days"
-              className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
+            <div className="relative">
+              <input
+                type="text"
+                id="processingTime"
+                name="processingTime"
+                value={formValues.processingTime}
+                onChange={handleInputChange}
+                placeholder="e.g., 7-14 days"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+              <FaRegClock className="absolute top-3 right-3 text-gray-500" />
+            </div>
           </div>
-        </Fade>
+        </Slide>
 
         {/* Required Documents */}
-        <Fade delay={500} triggerOnce>
+        <Slide left delay={500}>
           <div>
-            <label className="block font-semibold mb-2">Required Documents</label>
+            <label className="block font-semibold text-gray-700 mb-2">Required Documents</label>
             {documentOptions.map((doc) => (
               <div key={doc} className="flex items-center mb-2">
                 <input
@@ -159,18 +165,16 @@ const AddVisa = () => {
                   onChange={handleInputChange}
                   className="mr-2"
                 />
-                <label htmlFor={doc} className="text-gray-700">
-                  {doc}
-                </label>
+                <label htmlFor={doc} className="text-gray-700">{doc}</label>
               </div>
             ))}
           </div>
-        </Fade>
+        </Slide>
 
         {/* Description */}
-        <Fade delay={600} triggerOnce>
+        <Slide left delay={600}>
           <div>
-            <label htmlFor="description" className="block font-semibold">
+            <label htmlFor="description" className="block font-semibold text-gray-700 mb-2">
               Description
             </label>
             <textarea
@@ -179,17 +183,17 @@ const AddVisa = () => {
               value={formValues.description}
               onChange={handleInputChange}
               placeholder="Add a brief description..."
-              className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               rows="4"
               required
             ></textarea>
           </div>
-        </Fade>
+        </Slide>
 
         {/* Age Restriction */}
-        <Fade delay={700} triggerOnce>
+        <Slide left delay={700}>
           <div>
-            <label htmlFor="ageRestriction" className="block font-semibold">
+            <label htmlFor="ageRestriction" className="block font-semibold text-gray-700 mb-2">
               Age Restriction
             </label>
             <input
@@ -199,16 +203,16 @@ const AddVisa = () => {
               value={formValues.ageRestriction}
               onChange={handleInputChange}
               placeholder="Enter age restriction"
-              className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
-        </Fade>
+        </Slide>
 
         {/* Fee */}
-        <Fade delay={800} triggerOnce>
+        <Slide left delay={800}>
           <div>
-            <label htmlFor="fee" className="block font-semibold">
+            <label htmlFor="fee" className="block font-semibold text-gray-700 mb-2">
               Fee (in USD)
             </label>
             <input
@@ -218,16 +222,16 @@ const AddVisa = () => {
               value={formValues.fee}
               onChange={handleInputChange}
               placeholder="Enter visa fee"
-              className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
-        </Fade>
+        </Slide>
 
         {/* Validity */}
-        <Fade delay={900} triggerOnce>
+        <Slide left delay={900}>
           <div>
-            <label htmlFor="validity" className="block font-semibold">
+            <label htmlFor="validity" className="block font-semibold text-gray-700 mb-2">
               Validity
             </label>
             <input
@@ -237,16 +241,16 @@ const AddVisa = () => {
               value={formValues.validity}
               onChange={handleInputChange}
               placeholder="e.g., 6 months"
-              className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
-        </Fade>
+        </Slide>
 
         {/* Application Method */}
-        <Fade delay={1000} triggerOnce>
+        <Slide left delay={1000}>
           <div>
-            <label htmlFor="applicationMethod" className="block font-semibold">
+            <label htmlFor="applicationMethod" className="block font-semibold text-gray-700 mb-2">
               Application Method
             </label>
             <input
@@ -256,15 +260,21 @@ const AddVisa = () => {
               value={formValues.applicationMethod}
               onChange={handleInputChange}
               placeholder="e.g., Online/Offline"
-              className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
-        </Fade>
+        </Slide>
 
         {/* Submit Button */}
-        <div className="flex justify-center">
-          <button className="btn">Add Visa</button>
+        <div className="flex justify-center mt-6">
+          <button
+            type="submit"
+            className="px-6 py-3 bg-blue-600 text-white rounded-full flex items-center space-x-2 hover:bg-blue-700 transition-all"
+          >
+            <FaPaperPlane />
+            <span>Add Visa</span>
+          </button>
         </div>
       </form>
     </div>
