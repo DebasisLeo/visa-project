@@ -3,7 +3,7 @@ import { AuthContext } from './Providers/Authprovider';
 import { FaTimesCircle } from 'react-icons/fa';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import Swal from 'sweetalert2'; // Import SweetAlert2
+import Swal from 'sweetalert2'; 
 
 const MyVisaApplications = () => {
   const { user } = useContext(AuthContext);

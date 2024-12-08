@@ -1,21 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from './Providers/Authprovider';
-import { FaSignOutAlt, FaHome, FaUser, FaPlus, FaList } from 'react-icons/fa';
+import { FaSignOutAlt, FaHome, FaUser, FaPlus, FaList, FaBars, FaTimes } from 'react-icons/fa';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Handle sign-out function
   const handleSignOut = () => {
     signOutUser()
       .then(() => console.log('Signed out successfully'))
       .catch((error) => console.error('Error during sign-out:', error));
   };
 
-  // Initialize AOS animation
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   AOS.init();
 
   return (
@@ -30,8 +33,16 @@ const Navbar = () => {
           Visa Portal
         </Link>
 
+        {/* Mobile Menu Button */}
+        <button
+          onClick={toggleMobileMenu}
+          className="lg:hidden text-white"
+        >
+          {isMobileMenuOpen ? <FaTimes size={30} /> : <FaBars size={30} />}
+        </button>
+
         {/* Navigation Links */}
-        <ul className="flex space-x-6">
+        <ul className={`lg:flex space-x-6 ${isMobileMenuOpen ? 'flex flex-col items-center absolute top-20 left-0 right-0 bg-gradient-to-r from-blue-500 to-indigo-600 lg:static lg:flex-row lg:space-x-6 lg:bg-transparent lg:items-center' : 'hidden'}`}>
           <li>
             <NavLink
               to="/"
@@ -140,9 +151,8 @@ const Navbar = () => {
                   src={user.photoURL || '/default-avatar.png'}
                   alt={user.displayName || 'User'}
                   className="w-10 h-10 rounded-full cursor-pointer border-2 border-white hover:scale-110 transition duration-200"
-                  title={user.displayName}
                 />
-                <div className="absolute bottom-12 left-0 w-max bg-gray-800 text-white text-sm rounded px-3 py-1 opacity-0 group-hover:opacity-100 transition duration-200">
+                <div className="absolute bottom-12 left-0 w-max bg-gray-800 text-white text-sm rounded px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   {user.displayName || 'User'}
                 </div>
               </div>

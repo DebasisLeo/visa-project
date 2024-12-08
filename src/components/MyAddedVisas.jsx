@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from './Providers/Authprovider';
 import Swal from 'sweetalert2';
-import { FaEdit, FaTrash, FaWindowClose } from 'react-icons/fa'; // React Icons
+import { FaEdit, FaTrash, FaWindowClose } from 'react-icons/fa'; 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -11,7 +11,7 @@ const MyAddedVisas = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedVisa, setSelectedVisa] = useState(null);
 
-  // Initialize AOS animations
+ 
   useEffect(() => {
     AOS.init();
   }, []);

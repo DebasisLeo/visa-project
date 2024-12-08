@@ -24,8 +24,8 @@ const Home = () => {
   };
 
   useEffect(() => {
-    document.body.classList.remove('light', 'dark');
-    document.body.classList.add(theme);
+  //  console.log(document.html)
+  document.body.setAttribute('data-theme',theme)
   }, [theme]);
 
   const handleSeeDetails = (id) => {
