@@ -16,11 +16,13 @@ import MyVisaApplication from './components/MyVisaApplication.jsx';
 import Home from './components/Home.jsx';
 import AllVisas from './components/AllVisas.jsx';
 import VisaDetails from './components/VisaDetails.jsx';
+import NotFoundPage from './components/NotFoundPage.jsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
+    errorElement:<NotFoundPage></NotFoundPage>,
     children: [
       {
         path: '/',

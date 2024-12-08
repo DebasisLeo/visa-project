@@ -7,8 +7,8 @@ export default {
   theme: {
     extend: {},
   },
+  darkMode: 'class', // This enables class-based dark mode
   plugins: [
     require('daisyui'),
   ],
 }
-
