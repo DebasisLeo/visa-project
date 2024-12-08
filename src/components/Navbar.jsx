@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from './Providers/Authprovider';
-import { FaSignOutAlt, FaHome, FaUser } from 'react-icons/fa';
+import { FaSignOutAlt, FaHome, FaUser, FaPlus, FaList } from 'react-icons/fa';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
@@ -13,11 +15,18 @@ const Navbar = () => {
       .catch((error) => console.error('Error during sign-out:', error));
   };
 
+  // Initialize AOS animation
+  AOS.init();
+
   return (
-    <nav className="bg-gray-800 text-white shadow-md">
+    <nav className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg">
       <div className="container mx-auto flex justify-between items-center py-4 px-6">
         {/* Logo */}
-        <Link to="/" className="text-xl font-semibold hover:text-blue-300">
+        <Link
+          to="/"
+          className="text-3xl font-bold hover:text-yellow-300 transition-all duration-300"
+          data-aos="fade-down"
+        >
           Visa Portal
         </Link>
 
@@ -28,30 +37,30 @@ const Navbar = () => {
               to="/"
               className={({ isActive }) =>
                 isActive
-                  ? 'text-blue-400 font-bold'
-                  : 'hover:text-blue-300 transition duration-200'
+                  ? 'text-yellow-400 font-bold transition duration-200'
+                  : 'hover:text-yellow-300 transition duration-200'
               }
+              data-aos="fade-up"
+              data-aos-duration="1000"
             >
-              <FaHome className="inline mr-1" />
+              <FaHome className="inline mr-2" />
               Home
             </NavLink>
-          
-    
           </li>
           <li>
             <NavLink
               to="/all-visa"
               className={({ isActive }) =>
                 isActive
-                  ? 'text-blue-400 font-bold'
-                  : 'hover:text-blue-300 transition duration-200'
+                  ? 'text-yellow-400 font-bold transition duration-200'
+                  : 'hover:text-yellow-300 transition duration-200'
               }
+              data-aos="fade-up"
+              data-aos-duration="1000"
             >
-              <FaHome className="inline mr-1" />
+              <FaList className="inline mr-2" />
               All Visa
             </NavLink>
-          
-    
           </li>
           {user && (
             <>
@@ -60,10 +69,13 @@ const Navbar = () => {
                   to="/add-visa"
                   className={({ isActive }) =>
                     isActive
-                      ? 'text-blue-400 font-bold'
-                      : 'hover:text-blue-300 transition duration-200'
+                      ? 'text-yellow-400 font-bold transition duration-200'
+                      : 'hover:text-yellow-300 transition duration-200'
                   }
+                  data-aos="fade-up"
+                  data-aos-duration="1000"
                 >
+                  <FaPlus className="inline mr-2" />
                   Add Visa
                 </NavLink>
               </li>
@@ -72,9 +84,11 @@ const Navbar = () => {
                   to="/my-visas"
                   className={({ isActive }) =>
                     isActive
-                      ? 'text-blue-400 font-bold'
-                      : 'hover:text-blue-300 transition duration-200'
+                      ? 'text-yellow-400 font-bold transition duration-200'
+                      : 'hover:text-yellow-300 transition duration-200'
                   }
+                  data-aos="fade-up"
+                  data-aos-duration="1000"
                 >
                   My Added Visas
                 </NavLink>
@@ -84,9 +98,11 @@ const Navbar = () => {
                   to="/my-applications"
                   className={({ isActive }) =>
                     isActive
-                      ? 'text-blue-400 font-bold'
-                      : 'hover:text-blue-300 transition duration-200'
+                      ? 'text-yellow-400 font-bold transition duration-200'
+                      : 'hover:text-yellow-300 transition duration-200'
                   }
+                  data-aos="fade-up"
+                  data-aos-duration="1000"
                 >
                   My Visa Applications
                 </NavLink>
@@ -101,13 +117,17 @@ const Navbar = () => {
             <>
               <Link
                 to="/login"
-                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition duration-200"
+                className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-full transition duration-200"
+                data-aos="fade-left"
+                data-aos-duration="1000"
               >
                 Login
               </Link>
               <Link
                 to="/register"
-                className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition duration-200"
+                className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full transition duration-200"
+                data-aos="fade-left"
+                data-aos-duration="1000"
               >
                 Register
               </Link>
@@ -119,10 +139,10 @@ const Navbar = () => {
                 <img
                   src={user.photoURL || '/default-avatar.png'}
                   alt={user.displayName || 'User'}
-                  className="w-10 h-10 rounded-full cursor-pointer border-2 border-white hover:scale-105 transition duration-200"
+                  className="w-10 h-10 rounded-full cursor-pointer border-2 border-white hover:scale-110 transition duration-200"
                   title={user.displayName}
                 />
-                <div className="absolute bottom-12 left-0 w-max bg-gray-700 text-white text-sm rounded px-3 py-1 opacity-0 group-hover:opacity-100 transition duration-200">
+                <div className="absolute bottom-12 left-0 w-max bg-gray-800 text-white text-sm rounded px-3 py-1 opacity-0 group-hover:opacity-100 transition duration-200">
                   {user.displayName || 'User'}
                 </div>
               </div>
@@ -130,9 +150,11 @@ const Navbar = () => {
               {/* Logout Button */}
               <button
                 onClick={handleSignOut}
-                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition duration-200 flex items-center"
+                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full transition duration-200 flex items-center"
+                data-aos="fade-right"
+                data-aos-duration="1000"
               >
-                <FaSignOutAlt className="inline mr-1" />
+                <FaSignOutAlt className="inline mr-2" />
                 Logout
               </button>
             </div>
