@@ -32,7 +32,7 @@ const Navbar = () => {
         >
           Visa Portal
         </Link>
-
+ 
         {/* Mobile Menu Button */}
         <button
           onClick={toggleMobileMenu}
@@ -152,7 +152,7 @@ const Navbar = () => {
                   alt={user.displayName || 'User'}
                   className="w-10 h-10 rounded-full cursor-pointer border-2 border-white hover:scale-110 transition duration-200"
                 />
-                <div className="absolute bottom-12 left-0 w-max bg-gray-800 text-white text-sm rounded px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute top-6 z-10 -left-28 w-max bg-gray-800 text-white text-sm rounded px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   {user.displayName || 'User'}
                 </div>
               </div>

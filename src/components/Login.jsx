@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-
+import { AuthContext } from './Providers/Authprovider';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
@@ -9,7 +9,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { auth } from '../../firebase.init';
-import { AuthContext } from './Providers/Authprovider';
 
 const Login = () => {
   const { loginUser } = useContext(AuthContext);
@@ -30,10 +29,8 @@ const Login = () => {
       .then(() => {
         e.target.reset();
         toast.success('Login successful!');
-        
-        // Navigate to the desired route after login
-        const redirectTo = location.state?.from || '/'; // Redirect to the route user came from or home page
-        navigate(redirectTo);
+        navigate(location?.state ? location.state : "/");
+       
       })
       .catch((error) => {
         console.error(error.message);

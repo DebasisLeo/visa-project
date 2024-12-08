@@ -14,8 +14,8 @@ const PrivateRoutes = ({ children }) => {
       </div>
     );
   }
-
-  return user ? children : <Navigate  state={location.pathname} to="/login" />;
+  console.log("Redirecting to login from:", location.pathname);
+  return user ? children : <Navigate  state={{ from: location.pathname }} to="/login" />;
 };
 
 export default PrivateRoutes;
