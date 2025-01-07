@@ -169,6 +169,65 @@ const Home = () => {
         </div>
       </div>
 
+      {/* Newsletter Subscription Section */}
+<div className="my-12 bg-gray-100 py-12">
+  <h2 className="text-2xl font-bold text-center mb-6" data-aos="fade-up">
+    Stay Updated with Our Newsletter
+  </h2>
+  <p className="text-center mb-6 text-lg text-gray-600" data-aos="fade-up" data-aos-delay="100">
+    Subscribe to receive the latest visa updates, exclusive deals, and more!
+  </p>
+  <div className="flex justify-center">
+    <form className="w-full max-w-lg flex items-center bg-white shadow-lg rounded-full p-4">
+      <input
+        type="email"
+        placeholder="Enter your email address"
+        className="w-full px-6 py-2 rounded-l-full border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        required
+      />
+      <button
+        type="submit"
+        className="px-6 py-2 bg-blue-500 text-white rounded-r-full hover:bg-blue-600 transition-all"
+        data-aos="zoom-in"
+        data-aos-duration="1000"
+      >
+        Subscribe
+      </button>
+    </form>
+  </div>
+  <p className="text-center mt-4 text-sm text-gray-500" data-aos="fade-up" data-aos-delay="200">
+    We respect your privacy. Your email will never be shared.
+  </p>
+</div>
+
+
+
+{/* FAQ Section */}
+<div className="my-12">
+  <h2 className="text-2xl font-bold text-center mb-6" data-aos="fade-up">
+    Frequently Asked Questions
+  </h2>
+  <div className="space-y-6">
+    <div className="p-6 bg-white border rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="100">
+      <h3 className="font-bold text-lg">What documents do I need to apply for a visa?</h3>
+      <p className="mt-2">The required documents vary depending on the type of visa you are applying for. Typically, you'll need a passport, proof of funds, a visa application form, and sometimes a letter of invitation or sponsorship.</p>
+    </div>
+    <div className="p-6 bg-white border rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="200">
+      <h3 className="font-bold text-lg">How long does the visa processing take?</h3>
+      <p className="mt-2">Processing times vary by visa type and country. On average, it can take anywhere from a few days to a few weeks. We recommend applying well in advance to avoid delays.</p>
+    </div>
+    <div className="p-6 bg-white border rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="300">
+      <h3 className="font-bold text-lg">Can I apply for a visa if I have a criminal record?</h3>
+      <p className="mt-2">It depends on the country you are applying to. Some countries have strict visa policies regarding applicants with criminal records, while others may allow you to apply with additional documentation.</p>
+    </div>
+    <div className="p-6 bg-white border rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="400">
+      <h3 className="font-bold text-lg">Can I extend my visa while I am abroad?</h3>
+      <p className="mt-2">Some countries allow visa extensions while you are abroad, while others require you to leave the country and reapply for a new visa. Always check the specific rules for the country you are visiting.</p>
+    </div>
+  </div>
+</div>
+
+
       {/* See All Visas Button */}
       <div className="text-center mt-8">
         <button
