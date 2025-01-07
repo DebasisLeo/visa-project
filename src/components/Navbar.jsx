@@ -22,7 +22,7 @@ const Navbar = () => {
   AOS.init();
 
   return (
-    <nav className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg">
+    <nav className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center py-4 px-6">
         {/* Logo */}
         <Link
@@ -32,7 +32,7 @@ const Navbar = () => {
         >
           Visa Portal
         </Link>
- 
+
         {/* Mobile Menu Button */}
         <button
           onClick={toggleMobileMenu}
